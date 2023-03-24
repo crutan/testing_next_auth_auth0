@@ -5,11 +5,11 @@ import styles from "./page.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function LoggedInHome() {
   return (
     <main>
-      <h1>Home Page</h1>
-      <div>Everyone can see this.</div>
+      <h1>You have to be logged in to see this.</h1>
+      <div>Only logged in users can see this page.</div>
       <div>
         <Link href="/">Back to Home</Link>
       </div>
