@@ -12,7 +12,7 @@ const listClasses = `
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  const res = await fetch(process.env.HONEYCOMB_API_URL, {
+  const res = await fetch(process.env.HONEYCOMB_API_URL || "", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,8 +20,8 @@ export async function GET() {
     },
     body: JSON.stringify({ query: listClasses }),
   });
-  console.log(res.status);
   const data = await res.json();
+
   if (data?.data) {
     return NextResponse.json(data.data.classes);
   } else {

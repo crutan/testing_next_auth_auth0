@@ -5,14 +5,14 @@ import type { NextAuthOptions } from "next-auth";
 export const authOptions: NextAuthOptions = {
   providers: [
     Auth0Provider({
-      clientId: process.env.AUTH0_CLIENT_ID,
-      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      clientId: process.env.AUTH0_CLIENT_ID || "",
+      clientSecret: process.env.AUTH0_CLIENT_SECRET || "",
       issuer: process.env.AUTH0_ISSUER_BASE_URL,
-      audience: process.env.AUTH0_AUDIENCE,
+      audience: process.env.AUTH0_AUDIENCE || "",
       idToken: true,
       authorization: {
         params: {
-          audience: encodeURI(process.env.AUTH0_AUDIENCE),
+          audience: encodeURI(process.env.AUTH0_AUDIENCE || ""),
           scope: "openid profile email user:isAdmin roles",
         },
       },
