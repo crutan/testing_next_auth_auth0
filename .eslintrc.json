@@ -1,3 +1,106 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
+    "next/core-web-vitals",
+    "prettier",
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "react",
+    "simple-import-sort",
+    "import",
+    "tailwindcss",
+    "@graphql-eslint/eslint-plugin"
+  ],
+  "overrides": [
+    {
+      "files": ["*.graphql, *.gql, *.graphql.ts"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint/eslint-plugin"],
+      "rules": {
+        /**
+         * Possible Errors:
+         * descriptions of these rules can be found at:
+         * https://the-guild.dev/graphql/eslint/rules
+         */
+        "@graphql-eslint/known-type-names": "error",
+        "@graphql-eslint/require-id-when-available": "error",
+        "@graphql-eslint/require-deprecation-reason": "error",
+        "@graphql-eslint/known-fragment-names": "error",
+        "@graphql-eslint/possible-fragment-spread": "warn"
+      }
+    }
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+    "object-curly-spacing": ["error", "always"],
+    "react/jsx-sort-props": ["error"],
+    "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^react", "^next", "^@?\\w"],
+          // Internal packages.
+          ["^(components|context|hooks|models|pages|stories|utils)(/.*|$)"],
+          // Side effect imports.
+          ["^\\u0000"],
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // Style imports.
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ],
+    "tailwindcss/classnames-order": [
+      "warn",
+      {
+        "callees": ["clsx", "cn", "cva"]
+      }
+    ]
+  },
+  "globals": {
+    "React": "writable"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "tailwindcss": {
+      "callees": ["cn", "clsx"],
+      "removeDuplicates": true,
+      "enforces-shorthand": true
+    }
+  }
 }
