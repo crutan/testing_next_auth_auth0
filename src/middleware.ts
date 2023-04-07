@@ -1,6 +1,7 @@
-import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 import type { JWT } from "next-auth/jwt";
+import { withAuth } from "next-auth/middleware";
+
 interface LocalJWT extends JWT {
   user_roles?: string[];
 }
@@ -22,7 +23,7 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized({ req, token }) {
+      authorized({ token }) {
         if (token) return true; // If there is a token, the user is authenticated
         return false;
       },

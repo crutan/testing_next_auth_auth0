@@ -1,10 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
-import type { Account, Profile } from "next-auth";
-import type { JWT } from "next-auth/jwt";
 import Auth0Provider from "next-auth/providers/auth0";
-interface HoneyCombProfile extends Profile {
-  user_roles?: string[];
-}
+
+import type { HoneycombProfile, HoneycombSession } from "@/types";
 
 // export const authOptions: NextAuthOptions = {
 export const authOptions: NextAuthOptions = {
@@ -28,7 +25,6 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-          roles: profile.user_roles,
         };
       },
       style: {
@@ -42,17 +38,21 @@ export const authOptions: NextAuthOptions = {
     }), // as Auth0ProviderWithAudience)
   ],
   callbacks: {
-    session: async ({ session, token }: { session: any; token: any }) => {
+    session: async ({ session, token }) => {
+      const hc_session = session as HoneycombSession;
+
       if (token) {
-        session.user = {
-          name: token.name,
-          email: token.email,
-          image: token.picture || undefined,
+        hc_session.user = {
           id: token.sub,
-          roles: token.user_roles,
+          name: token.name || undefined,
+          email: token.email || undefined,
+          image: token.picture || undefined,
         };
-        session.accessToken = token.accessToken || undefined;
-        session.error = token.error || undefined;
+        if (token.roles && Array.isArray(token.roles)) {
+          hc_session.user.roles = token.roles;
+        }
+        hc_session.accessToken = String(token.accessToken) || undefined;
+        hc_session.error = String(token.error) || undefined;
       }
       return session;
     },
@@ -76,14 +76,14 @@ export const authOptions: NextAuthOptions = {
     //   return token;
     // },
     async jwt({ token, account, profile }) {
-      const hc_profile = profile as HoneyCombProfile;
+      const hc_profile = profile as HoneycombProfile;
+
       if (account) {
         token.accessToken = account.access_token;
       }
       if (hc_profile && hc_profile.user_roles) {
-        token.user_roles = hc_profile.user_roles || [];
+        token.roles = hc_profile.user_roles || [];
       }
-
       return token;
     },
   },

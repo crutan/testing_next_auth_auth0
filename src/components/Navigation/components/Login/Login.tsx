@@ -2,8 +2,10 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Link } from "ui/Link";
 
+import type { HoneycombSession } from "@/types";
+
 const Login = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const hc_session = session as HoneycombSession;
 
   if (hc_session && hc_session.user) {

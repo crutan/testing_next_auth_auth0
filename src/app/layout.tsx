@@ -1,17 +1,16 @@
 import { ComponentPropsWithoutRef } from "react";
+import { getServerSession } from "next-auth/next";
+import { futuraPassata, gotham } from "@styles/fonts";
 import { cva } from "class-variance-authority";
 import clsx from "clsx";
-import { cn } from "@/lib/utils/twHelpers";
-import { Session } from "next-auth";
-import { headers } from "next/headers";
-import { getServerSession } from "next-auth/next";
+
 import { authOptions } from "../pages/api/auth/[...nextauth]";
 
-import AuthContext from "@/components/Layouts/AuthContext";
-import { Navigation } from "@/components";
-import { futuraPassata, gotham } from "@styles/fonts";
-
 import "@styles/globals.css";
+
+import { Navigation } from "@/components";
+import AuthContext from "@/components/Layouts/AuthContext";
+import { cn } from "@/lib/utils/twHelpers";
 
 interface MainLayoutProps extends ComponentPropsWithoutRef<"div"> {
   theme?: "default" | "celesteal";

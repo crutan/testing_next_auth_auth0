@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
-import React, { ComponentPropsWithoutRef, ReactNode } from "react";
 import Link from "next/link";
 
-export interface AdminLayoutProps extends ComponentPropsWithoutRef<"div"> {
-  children?: ReactNode;
-}
-
-export default function AdminLayout({ children }: AdminLayoutProps) {
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
       <div className="flex min-h-screen flex-col">
@@ -46,7 +45,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   HoneyComb Main
                 </Link>
               </nav>
-              <div className="flex items-center space-x-4"></div>
+              <div className="flex items-center space-x-4" />
             </div>
           </div>
         </header>

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
+
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { HoneycombSession } from "@/types";
 const listClasses = `
   query ClassList {
     classes {
@@ -11,7 +13,7 @@ const listClasses = `
 `;
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as HoneycombSession;
   const res = await fetch(process.env.HONEYCOMB_API_URL || "", {
     method: "POST",
     headers: {
