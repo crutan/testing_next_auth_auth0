@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { Inter, Josefin_Sans } from "next/font/google";
 import { useSession } from "next-auth/react";
 
 export default function AdminHome() {

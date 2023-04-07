@@ -6,7 +6,6 @@ export default function Page() {
   const { data: session } = useSession();
   const hc_session = session as HoneycombSession;
 
-  console.log("Session: ", session);
   return (
     <div className="flex h-screen w-full flex-col bg-black text-white">
       <Grid

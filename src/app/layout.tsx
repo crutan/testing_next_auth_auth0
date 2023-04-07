@@ -2,6 +2,11 @@ import { ComponentPropsWithoutRef } from "react";
 import { cva } from "class-variance-authority";
 import clsx from "clsx";
 import { cn } from "@/lib/utils/twHelpers";
+import { Session } from "next-auth";
+import { headers } from "next/headers";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
+
 import AuthContext from "@/components/Layouts/AuthContext";
 import { Navigation } from "@/components";
 import { futuraPassata, gotham } from "@styles/fonts";
@@ -28,11 +33,13 @@ const RootLayout = async ({
   children,
   ...props
 }: MainLayoutProps) => {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body className="bg-onyx-800 text-onyx-25 contrast-more:bg-onyx-900 contrast-more:text-onyx-0">
         <div className={cn(MainLayoutTypes({ theme }), className)} {...props}>
-          <AuthContext>
+          <AuthContext session={session}>
             <div
               className={clsx(
                 futuraPassata.variable,

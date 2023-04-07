@@ -4,8 +4,9 @@ import { Link } from "ui/Link";
 
 const Login = () => {
   const { data: session, status } = useSession();
+  const hc_session = session as HoneycombSession;
 
-  if (session && session.user) {
+  if (hc_session && hc_session.user) {
     return (
       <>
         <li>
@@ -13,6 +14,14 @@ const Login = () => {
             Dashboard
           </Link>
         </li>
+        {hc_session.user.roles &&
+          hc_session.user.roles.includes("administrator") && (
+            <li>
+              <Link className="text-celesteal-400" href="/admin">
+                Admin
+              </Link>
+            </li>
+          )}
         <li>
           <Link
             className="text-celesteal-400"
