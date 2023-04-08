@@ -16,7 +16,7 @@ export default function Signin() {
       console.log("authed");
       void router.push(callback);
     }
-  }, [status]);
+  }, [status, callback, router]);
 
   return <div />;
 }
