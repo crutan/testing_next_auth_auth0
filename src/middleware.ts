@@ -23,12 +23,23 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized({ token }) {
+      authorized({ req, token }) {
+        const pathname = req.nextUrl.pathname;
+        if (
+          pathname.startsWith("/_next") ||
+          pathname === "/favicon.ico" ||
+          pathname === "/__ENV.js"
+        ) {
+          return true;
+        }
         if (token) return true; // If there is a token, the user is authenticated
         return false;
       },
     },
+    pages: {
+      signIn: "/auth/signin",
+    },
   }
 );
 
-export const config = { matcher: ["/admin"] };
+export const config = { matcher: ["/admin", "/dashboard"] };

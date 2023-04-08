@@ -30,7 +30,7 @@ const Login = () => {
             href="/api/auth/signOut"
             onClick={(e) => {
               e.preventDefault();
-              signOut();
+              signOut({ callbackUrl: "/" });
             }}
           >
             Logout

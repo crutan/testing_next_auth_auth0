@@ -3,7 +3,6 @@ import {
   ComponentPropsWithRef,
   ElementType,
 } from "react";
-import { IconUnion } from "ui/ComponentIcon";
 
 type UIBaseProps<T extends ElementType> = {
   as?: T;
@@ -22,10 +21,3 @@ export type UIBasePropsWithRef<T extends ElementType> =
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CVAVariants<K extends keyof any> = Record<K, string>;
-
-export const VariantIcons: Record<SemanticColor, IconUnion> = {
-  info: "InformationCircleIcon",
-  success: "CheckCircleIcon",
-  warning: "ExclamationTriangleIcon",
-  error: "XCircleIcon",
-};
