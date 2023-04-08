@@ -14,6 +14,7 @@
     "prettier",
     "next/core-web-vitals"
   ],
+  "ignorePatterns": ["temp.js", "**/gql/*.ts"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {

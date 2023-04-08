@@ -36,7 +36,7 @@ export default function AdminLayout({
 
           {/* Desktop nav area */}
           <div className="hidden md:flex md:min-w-0 md:flex-1 md:items-center md:justify-between">
-            <div className="min-w-0 flex-1 px-5"></div>
+            <div className="min-w-0 flex-1 px-5" />
 
             <div className="ml-10 flex shrink-0 items-center space-x-10 pr-4">
               <nav aria-label="Global" className="flex space-x-10">
