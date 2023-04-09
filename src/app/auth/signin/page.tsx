@@ -18,5 +18,5 @@ export default function Signin() {
     }
   }, [status, callback, router]);
 
-  return <div />;
+  return <div>Awaiting Sign In</div>;
 }
