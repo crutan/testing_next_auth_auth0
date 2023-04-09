@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
+import { Session } from "next-auth";
 import { GraphQLClient } from "graphql-request";
 
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { HoneycombSession } from "@/types";
-import { Session } from "next-auth";
 export { gql } from "graphql-request";
 
 const graphql_client = new GraphQLClient(
